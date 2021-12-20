@@ -35,7 +35,7 @@ export default function Home(searchValue) {
                   key={val.TIMESTAMP}
                 >
                   <Link className="external" to={`/publisher/${val.PUBLISHER}`}>
-                    <Button variant="contained">{val.PUBLISHER}</Button>
+                    <Button variant="contained" className="publisherButton">{val.PUBLISHER}</Button>
                   </Link>
                 </Grid>
               );
