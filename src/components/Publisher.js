@@ -11,14 +11,9 @@ export default function Publisher() {
   let v = apiData.filter(
     (doc) => doc.PUBLISHER === decodeURI(window.location.pathname.split("/")[2])
   );
-  if(v.length===0)
-  {
-   apiData.forEach(doc =>{
-// 
-    })
-  }
+ 
 
-//   v.sort((a, b) => parseFloat(b.TIMESTAMP) - parseFloat(a.TIMESTAMP));
+   v.sort((a, b) => parseFloat(b.TIMESTAMP) - parseFloat(a.TIMESTAMP));
 
   return (
     <>
@@ -27,7 +22,7 @@ export default function Publisher() {
       {v.map((val) => {
         console.log(val.TIMESTAMP);
         return (
-          <Grid container spacing={2} key={val.TIMESTAMP}>
+          <Grid container spacing={2} key={val.TIMESTAMP} >
             <Grid
               item
               xs={12}

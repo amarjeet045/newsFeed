@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import FeedApiContext from "../context/FeedApiContext";
+import Home from "./Home";
 import Results from "./Results";
-
 
 export default function Search() {
   const inputValue = useRef();
@@ -23,17 +23,10 @@ export default function Search() {
         .includes(inputValue.current.value.toLowerCase());
     });
     console.log(filtered);
-   
+
     setSearchedValue(filtered);
-
   };
-  console.log(searchedValue)
-//   useEffect(() =>{
-//       Home(searchedValue)
-//       Publisher(searchedValue)
-//       return ;
-
-//   },[searchedValue])
+  console.log(searchedValue);
   return (
     <div>
       <input type="text" ref={inputValue}></input>

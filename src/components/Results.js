@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import { Card, Box } from "@mui/material";
 import moment from "moment";
 export default function Results(value) {
-  console.log(value.value);
+  
   return (
     <div>
       {value.value.length > 0 ? (
@@ -22,7 +22,7 @@ export default function Results(value) {
                   display: "block",
                   margin: "20px auto",
                 }}
-                key={val.TIMESTAMP}
+                key={val.TITLE}
               >
             
                 <Card style={{ backgroundColor: "#4f4f4f", color: "#fff" }}>
