@@ -1,37 +1,29 @@
 import React, { useRef, useState, useEffect } from "react";
 import FeedApiContext from "../context/FeedApiContext";
+import { useResultData } from "../context/ResultApiContext";
 import Home from "./Home";
-import Results from "./Results";
 
+export const SearchResultValue = React.createContext();
 export default function Search() {
   const inputValue = useRef();
   const { apiData } = FeedApiContext();
-  const [searchedValue, setSearchedValue] = useState([]);
-  const handleSearch = () => {
-    const data = [];
-    apiData.forEach((doc) => {
-      const val = {
-        PUBLISHER: doc.PUBLISHER,
-        TITLE: doc.TITLE,
-      };
-      data.push(val);
-    });
-    const filtered = data.filter((doc) => {
-      return Object.values(doc)
-        .join("")
-        .toLowerCase()
-        .includes(inputValue.current.value.toLowerCase());
-    });
-    console.log(filtered);
+  const [isSearchActive, setSearchActive] = useState(false);
 
-    setSearchedValue(filtered);
+  const [searchedValue, setSearchedValue] = useState([]);
+  const { handleSearchResult } = useResultData();
+  const handleSearch = async () => {
+    setSearchActive(true);
+    
+    handleSearchResult(apiData, inputValue.current.value.toLowerCase(),window.location.href);
+    inputValue.current.value= ""
+  
   };
   console.log(searchedValue);
   return (
     <div>
       <input type="text" ref={inputValue}></input>
       <button onClick={handleSearch}>Search</button>
-      <Results value={searchedValue} />
+      {/* <Results value={searchedValue} /> */}
     </div>
   );
 }

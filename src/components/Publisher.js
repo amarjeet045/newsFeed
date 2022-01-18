@@ -5,8 +5,17 @@ import { Card, Box } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { Link } from "react-router-dom";
 import moment from "moment";
+import { useResultData } from "../context/ResultApiContext";
+import ResultCards from "./ResultCards";
 export default function Publisher() {
   const { apiData } = FeedApiContext();
+  const { searchResult,searchLocation } = useResultData();
+  console.log(searchLocation,window.location.href)
+  console.log(searchResult)
+  const [serachFlag,setSearchFlag] =  useState(false)
+  const currentRoute =  new URL(window.location.href)
+  console.log(currentRoute)
+
   console.log(decodeURI(window.location.pathname.split("/")[2]).replace("(blog)",""));
   let v = apiData.filter(
     (doc) => doc.PUBLISHER === decodeURI(window.location.pathname.split("/")[2])
@@ -18,11 +27,11 @@ export default function Publisher() {
   return (
     <>
       
-
+      {searchResult.length>0?<ResultCards />:""}
       {v.map((val) => {
         console.log(val.TIMESTAMP);
         return (
-          <Grid container spacing={2} key={val.TIMESTAMP} >
+          <Grid container spacing={2} key={val.TIMESTAMP} className="individualCards" >
             <Grid
               item
               xs={12}

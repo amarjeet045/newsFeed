@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 export default function FeedApiContext() {
   const [apiData, setApiData] = useState([]);
+
   useEffect(() => {
     async function fetchUsers() {
       var raw = undefined;
@@ -39,6 +40,7 @@ export default function FeedApiContext() {
   }, []);
   const value = {
     apiData,
+  
   };
   return value;
 }

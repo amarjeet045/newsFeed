@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import FeedApiContext from "../context/FeedApiContext";
 import Search from "./Search";
+import { useResultData } from "../context/ResultApiContext";
 import Grid from "@mui/material/Grid";
 import { Button } from "@mui/material";
+import ResultCards from "./ResultCards";
 export default function Home(searchValue) {
-  console.log(searchValue);
-  const [searchResult, setSearchResult] = useState(false);
-
-  // console.log(searchResult)
+  const { searchResult,searchLocation } = useResultData();
+  console.log(searchLocation,window.location.href)
+ 
   const { apiData } = FeedApiContext();
   const publisher = apiData.map((pub) => pub.PUBLISHER);
   const filtered = apiData.filter(
@@ -17,9 +18,10 @@ export default function Home(searchValue) {
 
   return (
     <>
+    {searchResult.length>0?<ResultCards />:""}
       {apiData !== undefined ? (
         <>
-          <Grid container spacing={2}>
+          <Grid container spacing={2} className="homepageButton">
             {filtered.map((val) => {
               return (
                 <Grid
@@ -35,7 +37,9 @@ export default function Home(searchValue) {
                   key={val.TIMESTAMP}
                 >
                   <Link className="external" to={`/publisher/${val.PUBLISHER}`}>
-                    <Button variant="contained" className="publisherButton">{val.PUBLISHER}</Button>
+                    <Button variant="contained" className="publisherButton">
+                      {val.PUBLISHER}
+                    </Button>
                   </Link>
                 </Grid>
               );
